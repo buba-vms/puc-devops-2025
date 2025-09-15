@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . || true",
-    "test": "jest --runInBand || true",
+    "test": "jest",
     "build": "mkdir -p build && echo 'build placeholder' > build/README.txt"  },
   "repository": {
     "type": "git",
