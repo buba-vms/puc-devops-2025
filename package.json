@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint . || true",
     "test": "jest",
-    "build": "mkdir -p build && echo 'build placeholder' > build/README.txt"  },
+    "build": "mkdir -p build && echo 'build placeholder' > build/README.txt"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/buba-vms/puc-devops-2025.git"
