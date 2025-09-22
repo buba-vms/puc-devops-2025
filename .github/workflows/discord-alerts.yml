@@ -1,0 +1,25 @@
+name: Discord Alerts
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+
+jobs:
+  notify:
+    if: github.event.pull_request.merged == true || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send notification to Discord
+        run: |
+          MESSAGE="🔔 Repositório: ${{ github.repository }}%0A
+          👤 Autor: ${{ github.actor }}%0A
+          📌 Ação: ${{ github.event_name }}%0A
+          🔗 Commit/PR: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+          
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d "{\"content\": \"$MESSAGE\"}" \
+               ${{ secrets.DISCORD_WEBHOOK_URL }}
