@@ -14,12 +14,11 @@ jobs:
     steps:
       - name: Send notification to Discord
         run: |
-          MESSAGE="🔔 Repositório: ${{ github.repository }}%0A
-          👤 Autor: ${{ github.actor }}%0A
-          📌 Ação: ${{ github.event_name }}%0A
-          🔗 Commit/PR: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
-          
+          MESSAGE="🔔 **Repositório:** ${{ github.repository }}\n👤 **Autor:** ${{ github.actor }}\n📌 **Ação:** ${{ github.event_name }}\n🔗 [Ver commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})"
+
+          PAYLOAD=$(jq -n --arg content "$MESSAGE" '{content: $content}')
+
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"$MESSAGE\"}" \
+               -d "$PAYLOAD" \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
