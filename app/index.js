@@ -1,3 +1,4 @@
+// index.js
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -25,10 +26,19 @@ app.get("/frases/aleatoria", (req, res) => {
 
 app.post("/frases", (req, res) => {
   const { frase } = req.body;
+
+  if (!frase || frase.trim() === "") {
+    return res.status(400).json({ erro: "Campo 'frase' é obrigatório" });
+  }
+
   frases.push(frase);
   res.status(201).json({ mensagem: "Frase adicionada!", frases });
 });
 
-app.listen(port, () => {
-  console.log(`API rodando em http://localhost:${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`API rodando em http://localhost:${port}`);
+  });
+}
+
+module.exports = app;

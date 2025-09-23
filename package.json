@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . || true",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "build": "mkdir -p build && echo 'build placeholder' > build/README.txt"
   },
   "repository": {
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "eslint": "^9.35.0",
-    "jest": "^30.1.3"
+    "jest": "^30.1.3",
+    "supertest": "^7.1.4"
   }
 }
