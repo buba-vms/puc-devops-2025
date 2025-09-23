@@ -25,6 +25,12 @@ app.get("/frases/aleatoria", (req, res) => {
 
 app.post("/frases", (req, res) => {
   const { frase } = req.body;
+
+  // Verifica se a frase existe e não é só espaços
+  if (!frase || frase.trim() === "") {
+    return res.status(400).json({ erro: "Campo 'frase' é obrigatório" });
+  }
+
   frases.push(frase);
   res.status(201).json({ mensagem: "Frase adicionada!", frases });
 });
@@ -32,3 +38,6 @@ app.post("/frases", (req, res) => {
 app.listen(port, () => {
   console.log(`API rodando em http://localhost:${port}`);
 });
+
+
+module.exports = app;
