@@ -1,5 +1,15 @@
 const request = require("supertest");
-const app = require("../app"); // ajuste o caminho se necessário
+const app = require("../app");
+
+let server;
+
+beforeAll((done) => {
+  server = app.listen(0, done);
+});
+
+afterAll(async () => {
+  await new Promise((resolve) => server.close(resolve));
+});
 
 describe("Testes da API de frases", () => {
   test("GET / deve responder com a mensagem de boas-vindas", async () => {
